@@ -122,7 +122,14 @@ url = st.text_input("Enter wensite url")
 det = st.text_input("Enter company details (optional)")
 
 if st.button("Generate"):
-    scrape = get_scrape(url)
+    try:
+        if url!= "":
+            scrape = get_scrape(url)
+        else:
+            scrape = ""
+    except:
+        scrape = ""
+        st.info("URL cannot be scraped, please enter another url.")
     company_b = company_brief(f"Company details: \n\n {det} \n\n Company website scrape: \n\n {scrape}")
     st.header("COMPANY BRIEF")
     st.write(company_b)
